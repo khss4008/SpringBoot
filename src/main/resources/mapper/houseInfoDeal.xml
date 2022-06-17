@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper
+	namespace="com.ssafy.happyhouse.model.mapper.HouseInfoDealMapper">
+
+	<select id="select" parameterType="long"
+		resultType="HouseInfoDeal">
+		SELECT housedeal.no,
+		housedeal.dealAmount,
+		housedeal.dealYear,
+		housedeal.dealMonth,
+		housedeal.dealDay,
+		housedeal.area,
+		housedeal.floor,
+		housedeal.cancelDealType,
+		housedeal.aptCode,
+		houseinfo.dongCode,
+		houseinfo.dong,
+		houseinfo.buildYear,
+		houseinfo.jibun,
+		houseinfo.lat,
+		houseinfo.lng,
+		houseinfo.roadName,
+		houseinfo.roadNameBonbun,
+		houseinfo.roadNameBubun,
+		houseinfo.roadNameSeq,
+		houseinfo.roadNameBasementCode,
+		houseinfo.roadNameCode,
+		houseinfo.bonbun,
+		houseinfo.bubun,
+		houseinfo.sigunguCode,
+		houseinfo.eubmyundongCode,
+		houseinfo.landCode,
+		houseinfo.apartmentName
+		FROM housedeal
+		JOIN houseinfo
+		ON
+		housedeal.aptCode = houseinfo.aptCode
+		WHERE no=#{no};
+	</select>
+
+	<select id="selectAll" resultType="HouseInfoDeal">
+		SELECT housedeal.no,
+		housedeal.dealAmount,
+		housedeal.dealYear,
+		housedeal.dealMonth,
+		housedeal.dealDay,
+		housedeal.area,
+		housedeal.floor,
+		housedeal.cancelDealType,
+		housedeal.aptCode,
+		houseinfo.dongCode,
+		houseinfo.dong,
+		houseinfo.buildYear,
+		houseinfo.jibun,
+		houseinfo.lat,
+		houseinfo.lng,
+		houseinfo.roadName,
+		houseinfo.roadNameBonbun,
+		houseinfo.roadNameBubun,
+		houseinfo.roadNameSeq,
+		houseinfo.roadNameBasementCode,
+		houseinfo.roadNameCode,
+		houseinfo.bonbun,
+		houseinfo.bubun,
+		houseinfo.sigunguCode,
+		houseinfo.eubmyundongCode,
+		houseinfo.landCode,
+		houseinfo.apartmentName
+		FROM housedeal
+		JOIN houseinfo
+		ON housedeal.aptCode = houseinfo.aptCode
+		ORDER BY housedeal.no desc
+		LIMIT 1000
+	</select>
+
+	<select id="selectAllByDong" parameterType="String"
+		resultType="HouseInfoDeal">
+		SELECT housedeal.no,
+		housedeal.dealAmount,
+		housedeal.dealYear,
+		housedeal.dealMonth,
+		housedeal.dealDay,
+		housedeal.area,
+		housedeal.floor,
+		housedeal.cancelDealType,
+		housedeal.aptCode,
+		houseinfo.dongCode,
+		houseinfo.dong,
+		houseinfo.buildYear,
+		houseinfo.jibun,
+		houseinfo.lat,
+		houseinfo.lng,
+		houseinfo.roadName,
+		houseinfo.roadNameBonbun,
+		houseinfo.roadNameBubun,
+		houseinfo.roadNameSeq,
+		houseinfo.roadNameBasementCode,
+		houseinfo.roadNameCode,
+		houseinfo.bonbun,
+		houseinfo.bubun,
+		houseinfo.sigunguCode,
+		houseinfo.eubmyundongCode,
+		houseinfo.landCode,
+		houseinfo.apartmentName
+		FROM housedeal
+		JOIN houseinfo
+		ON
+		housedeal.aptCode = houseinfo.aptCode
+		WHERE dongCode=#{dongCode}
+		ORDER
+		BY housedeal.no desc
+		LIMIT 1000
+	</select>
+
+	<select id="selectAllByName" parameterType="String"
+		resultType="HouseInfoDeal">
+		SELECT housedeal.no,
+		housedeal.dealAmount,
+		housedeal.dealYear,
+		housedeal.dealMonth,
+		housedeal.dealDay,
+		housedeal.area,
+		housedeal.floor,
+		housedeal.cancelDealType,
+		housedeal.aptCode,
+		houseinfo.dongCode,
+		houseinfo.dong,
+		houseinfo.buildYear,
+		houseinfo.jibun,
+		houseinfo.lat,
+		houseinfo.lng,
+		houseinfo.roadName,
+		houseinfo.roadNameBonbun,
+		houseinfo.roadNameBubun,
+		houseinfo.roadNameSeq,
+		houseinfo.roadNameBasementCode,
+		houseinfo.roadNameCode,
+		houseinfo.bonbun,
+		houseinfo.bubun,
+		houseinfo.sigunguCode,
+		houseinfo.eubmyundongCode,
+		houseinfo.landCode,
+		houseinfo.apartmentName
+		FROM housedeal
+		JOIN houseinfo
+		ON
+		housedeal.aptCode = houseinfo.aptCode
+		WHERE houseinfo.apartmentName
+		Like
+		CONCAT('%', #{apartmentName}, '%')
+		ORDER BY housedeal.no desc
+		LIMIT
+		1000
+	</select>
+
+	<select id="selectAllByRadius" parameterType="Map"
+		resultType="HouseInfoDeal">
+		SELECT housedeal.no,
+		housedeal.dealAmount,
+		housedeal.dealYear,
+		housedeal.dealMonth,
+		housedeal.dealDay,
+		housedeal.area,
+		housedeal.floor,
+		housedeal.cancelDealType,
+		housedeal.aptCode,
+		houseinfo.dongCode,
+		houseinfo.dong,
+		houseinfo.buildYear,
+		houseinfo.jibun,
+		houseinfo.lat,
+		houseinfo.lng,
+		houseinfo.roadName,
+		houseinfo.roadNameBonbun,
+		houseinfo.roadNameBubun,
+		houseinfo.roadNameSeq,
+		houseinfo.roadNameBasementCode,
+		houseinfo.roadNameCode,
+		houseinfo.bonbun,
+		houseinfo.bubun,
+		houseinfo.sigunguCode,
+		houseinfo.eubmyundongCode,
+		houseinfo.landCode,
+		houseinfo.apartmentName
+		FROM housedeal
+		JOIN houseinfo
+		ON housedeal.aptCode = houseinfo.aptCode
+		HAVING houseinfo.dongCode like "11%" and housedeal.dealYear = "2022" and
+		ST_DISTANCE_SPHERE(POINT(#{lng}, #{lat}),
+		POINT(lng, lat)) <![CDATA[<]]> #{radius}
+		ORDER BY housedeal.no desc
+		LIMIT 1000
+	</select>
+</mapper>

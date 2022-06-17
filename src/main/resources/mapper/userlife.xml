@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssafy.happyhouse.model.mapper.UserLifeMapper">
+	<select id="selectUserLife" resultType="UserLife">
+		select * from userlife where uid=#{uid};
+	</select>
+	
+	<insert id="insertUserLife">
+		insert into userlife(uid, locationName, lat, lng) values(#{uid},#{locationName},#{lat},#{lng});
+	</insert>
+	
+	<update id="updateUserLife">
+		update userlife set locationName=#{locationName}, lat=#{lat}, lng=#{lng} where lid=#{lid};
+	</update>
+	
+	<delete id="deleteUserLife">
+		delete from userlife where lid=#{lid};
+	</delete>
+	
+</mapper>

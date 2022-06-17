@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssafy.happyhouse.model.mapper.NoticeMapper">
+
+<select id="selectNotice" resultType="Notice">
+	select * from notice where nid=#{nid};
+</select>
+<!-- <select id="selectAllBoard" resultType="Board">
+	select a.qnano
+,b.userName
+,a.title
+,a.content
+,a.regtime 
+from board a, userinfo b 
+where a.uid = b.uid;
+
+</select> -->
+
+<insert id="insertNotice">
+	insert into notice(uid, title, content) values(#{uid}, #{title}, #{content}); 
+</insert> 
+
+<update id="updateNotice">
+	update notice set uid=#{uid}, title=#{title}, content=#{content} where nid=#{nid}; 
+</update>
+
+<delete id="deleteNotice">
+	delete from notice where nid=#{nid};
+</delete>
+
+</mapper>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	
+<mapper namespace="com.ssafy.happyhouse.model.mapper.HouseInfoMapper">
+
+	<select id="selectByAptCode" parameterType="int" resultType="HouseInfo">
+		select aptCode, aptName, dongCode, dongName, buildYear, jibun, lat, lng, img
+		from houseinfo
+		where aptCode=#{aptCode}
+	</select>
+<!-- 
+	<select id="selectAllByName" parameterType="String" resultType="HouseInfo">
+	</select>
+	
+	<select id="selectAllByDongCode" parameterType="String" resultType="HouseInfo">
+	</select>
+	
+	<select id="selectAllByDongName" parameterType="String" resultType="HouseInfo">
+	</select>
+ -->
+</mapper>
